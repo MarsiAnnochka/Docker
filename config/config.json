@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "qwerty",
+    "database": "models",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "qwerty",
+    "database": "models",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "postgres",
+    "password": "qwerty",
+    "database": "models",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}

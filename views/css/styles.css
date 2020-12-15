@@ -1,0 +1,113 @@
+
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family: 'Bangers', cursive;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+header{
+    width: 100%;
+    background: #FA8072;
+    display: flex;
+}
+
+.header__logo{
+    text-transform: uppercase;
+    color: #FFF;
+    font-weight: 500;
+    font-size: 24px;
+    cursor: pointer;
+    margin-top: 56px;
+    margin-left: 10%;
+}
+
+nav{
+    margin-top: 56px;
+    margin-left: 50%;
+}
+
+.topnav a{
+    color: #fff;
+    text-align: center;
+    padding: 12px 25px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.topnav a:hover{
+    border-bottom: 3px double #8B0000;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+main .welcome{
+    text-align: center;
+    background: #FA8072;
+    padding: 200px 0 300px 0;
+}
+
+main .welcome h1{
+    color: #FFE4E1;
+    font-size: 70px;
+    letter-spacing: 20px;
+    text-shadow: 2px 2px #ff0000;
+}
+
+.wrapper{
+    width: 90%;
+    margin: 0 auto;
+}
+
+main .about{
+    display: flex;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    font: 24px Georgia, serif;
+    text-align: justify;
+}
+
+.about__right{
+    margin-left: 120px;
+    padding-top: 80px;
+}
+
+.about__left h1{
+    padding-bottom: 210px;
+}
+
+.about__left ul{
+    list-style-type: circle;
+    list-style-position: inside;
+}
+.about__left li{
+    display: list-item;
+    padding-left: 40px;
+}
+
+main .contact{
+    display: flex;
+    padding: 100px 0 100px 0;
+}
+
+.contact h1{
+    padding-top: 30px;
+    font-size: 40px;
+}
+.contact a{
+    padding-left: 200px;
+}

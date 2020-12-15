@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <!--<link type = "text/css" rel = "stylesheet" href = "css/styles.css">-->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+        }
+
+        body{
+            font-family: 'Bangers', cursive;
+        }
+
+        a{
+            text-decoration: none;
+        }
+
+        li{
+            list-style: none;
+        }
+
+        header{
+            width: 100%;
+            background: #FA8072;
+            display: flex;
+        }
+
+        .header__logo{
+            text-transform: uppercase;
+            color: #FFF;
+            font-weight: 500;
+            font-size: 24px;
+            cursor: pointer;
+            margin-top: 56px;
+            margin-left: 10%;
+        }
+
+        main{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        main .welcome{
+            text-align: center;
+            background: #FA8072;
+            padding: 200px 0 300px 0;
+        }
+
+        main .welcome h1{
+            color: #FFE4E1;
+            font-size: 70px;
+            letter-spacing: 20px;
+            text-shadow: 2px 2px #ff0000;
+        }
+
+        .wrapper{
+            width: 90%;
+            margin: 0 auto;
+
+            padding-top: 100px;
+            padding-bottom: 100px;
+            font: 24px Georgia, serif;
+            text-align: justify;
+            line-height: 100px;
+        }
+
+        #ready{
+            background-color: #FA8072;
+            padding: 30px 50px;
+            font-size: 30px;
+            border: 2px solid #000000
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class = "header__logo">{{>logo}}</div>
+    {{> menu}}
+</header>
+<main>
+    <div class = "welcome">
+        <h1>{{title}}</h1>
+        <p style = "padding-top: 30px; letter-spacing: 10px; font-size: 40px;">{{task_name}}</p>
+    </div>
+    <div class = "wrapper">
+        <h1 id = "about">{{task}}:</h1>
+        <form method="get" action="{{path}}">
+        <p>
+            <b>Array 1 </b>
+            <input required="true" type="text" name="arr1"><br>
+            <b>Array 2 </b>
+            <input required="true" type="text" name="arr2"><br>
+            <input type="submit" value="Ready" id="ready">
+        </p>
+        </form>
+    </div>
+</main>
+{{> footer}}
+</body>
+</html>

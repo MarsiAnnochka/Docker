@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true
+  },
+  "files": [],
+  "include": [
+    "./**/*.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
