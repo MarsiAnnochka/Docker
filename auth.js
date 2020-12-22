@@ -31,6 +31,7 @@ module.exports.register = function register(request, response) {
 };
 
 module.exports.auth = function auth(request, response) {
+console.log('hello2')
     let username = request.query.username || ''
     let password = request.query.password || ''
     if (username && password) {

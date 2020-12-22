@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <!--<link type = "text/css" rel = "stylesheet" href = "css/styles.css">-->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+        }
+
+        body{
+            font-family: 'Bangers', cursive;
+            background: #ececec;
+        }
+
+        a{
+            text-decoration: none;
+        }
+
+        li{
+            list-style: none;
+        }
+
+        header{
+            width: 100%;
+            background: #FA8072;
+            display: flex;
+        }
+
+        .header__logo{
+            text-transform: uppercase;
+            color: #FFF;
+            font-weight: 500;
+            font-size: 24px;
+            cursor: pointer;
+            margin-top: 56px;
+            margin-left: 10%;
+        }
+
+        main{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        main .welcome{
+            text-align: center;
+            background: #FA8072;
+            padding: 200px 0 300px 0;
+        }
+
+        main .welcome h1{
+            color: #FFE4E1;
+            font-size: 70px;
+            letter-spacing: 20px;
+            text-shadow: 2px 2px #ff0000;
+        }
+
+        .wrapper{
+            width: 100%;
+            margin: 0 0;
+
+            padding-top: 100px;
+            padding-bottom: 100px;
+            font: 24px Georgia, serif;
+            text-align: justify;
+            line-height: 100px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        .product {
+            background: #fff none repeat scroll 0 0;
+            border: 1px solid #c0c0c0;
+            height: 600px;
+            overflow: hidden;
+            padding: 0px 0px;
+            position: relative;
+            transition: all 0.5s ease 0s;
+            margin: 20px 0px 10px 20px;
+            display: block;
+            width: 23%;
+            float: left;
+            text-align: center;
+        }
+        .product:hover {
+            box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+        }
+        .product-img {
+            height: 300px;
+        }
+        .product-title a {
+            color: #000;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        .product-price {
+            left: 0;
+            position: absolute;
+            width: 100%;
+            color: #d51e08;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        #count {
+            width: 30%;
+            font-size: 24px;
+            margin-top: 100px;
+        }
+
+        #add {
+            background-color: #FA8072;
+            padding: 30px 50px;
+            font-size: 30px;
+            border: 2px solid #000000;
+            float: right;
+            margin: 0px 30px 30px 0px;
+        }
+        .result {
+            float: left;
+            margin-left: 20px;
+        }
+    </style>
+    <script>
+        import img1 from './images/0.jpeg'
+        import img2 from './images/1.jpeg'
+        import img3 from './images/2.jpg'
+        import img4 from './images/3.jpg'
+        import img5 from './images/4.jpeg'
+        import img6 from './images/5.jpeg'
+        import img7 from './images/6.jpg'
+        import img8 from './images/7.jpg'
+        const prices = [100, 70, 70, 138, 99, 80, 200, 100]
+        const images = [img1, img2, img3, img4, img5, img6, img7, img8]
+        const products = [
+            'Тюльпан','Роза','Гвоздика','Астра','Хризантема','Ирис','Нарцисс','Ромашка'
+        ]
+        let result = 0;
+        let counts = [0,0,0,0,0,0,0,0]
+        const onChange = ()=>{
+            /*
+            let deltaValue = event.target.value - counts[event.target.name]
+            result+= prices[event.target.name]*deltaValue
+            counts[event.target.name]=event.target.value
+
+             */
+            let newResult = 0;
+            for (let i=0; i<8; i++)
+                newResult +=  prices[i]
+            result=newResult;
+        }
+        const getResult = ()=>{
+            return result;
+        }
+
+    </script>
+</head>
+<body>
+<header>
+    <div class = "header__logo">{{>logo}}</div>
+    {{> menu}}
+</header>
+<main>
+    <div class = "welcome">
+        <h1>{{title}}</h1>
+        <p style = "padding-top: 30px; letter-spacing: 10px; font-size: 40px;">{{name}}</p>
+    </div>
+    <div class = "wrapper">
+        <form method="get" action="">
+            <ul class="products">
+                {{#each products}}
+                    <div class="product">
+                        {{renderProduct @index}}
+                        <input name={{@index}} id="count" type="number" min="0" />
+                    </div>
+                {{/each}}
+            </ul>
+            <div class="result">
+                <p>Итого: </p>
+                <p>На вашем счету  руб </p>
+                <button type="button" onclick={onChange()}>Посчитать</button>
+                <input type="submit" value="Добавить в корзину" id="add" />
+            </div>
+        </form>
+    </div>
+</main>
+{{> footer}}
+</body>
+</html>
+

@@ -10,6 +10,7 @@ const user = require('./models/model')(sequelize, Sequelize);
 
 router.use(RequestLogging)
 
+
 router.get('/register', function(request, response){
     response.render("auth.hbs",{
         title: "Добро пожаловать!",
@@ -22,15 +23,27 @@ router.get('/register/success', function (request, response){
     auth.register(request, response)
 })
 router.get('/auth', function(request, response){
-        response.render("auth.hbs", {
-            title: "Добро пожаловать!",
-            task: "Введите имя пользователя и пароль",
-            path: "/auth/success",
-            name: "Авторизация"
-        })
+        response.render("auth.hbs",{
+        title: "Добро пожаловать!",
+        task: "Введите имя пользователя и пароль",
+        path: "/auth/success",
+        name: "Авторизация"
+    })
 })
+
 router.get('/auth/success', function(request, response){
     auth.auth(request, response)
+})
+
+router.get('/catalog', function(request, response){
+    response.render("catalog.hbs", {
+            title: "Добро пожаловать!",
+            name: "Каталог",
+            products: {
+                'Тюльпан':100, 'Роза':100, 'Гвоздика':100, 'Астра':100, 'Хризантема':100, 'Ирис':100, 'Нарцисс':100, 'Ромашка':100,
+            },
+
+    })
 })
 router.get('/home', async function(request, response){
     if (request.session.user) {
