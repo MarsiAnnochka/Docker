@@ -1,4 +1,3 @@
-
 const router = require('express').Router();
 const auth = require('./auth')
 const fs = require('fs')
@@ -10,64 +9,35 @@ const user = require('./models/model')(sequelize, Sequelize);
 
 router.use(RequestLogging)
 
-
-router.get('/register', function(request, response){
-    response.render("auth.hbs",{
-        title: "Добро пожаловать!",
-        task: "Введите имя пользователя и пароль",
-        path: "/register/success",
-        name: "Регистрация"
-    })
-})
-router.get('/register/success', function (request, response){
+router.post('/api/register', function(request, response){
     auth.register(request, response)
 })
-router.get('/auth', function(request, response){
-        response.render("auth.hbs",{
-        title: "Добро пожаловать!",
-        task: "Введите имя пользователя и пароль",
-        path: "/auth/success",
-        name: "Авторизация"
-    })
-})
-
-router.get('/auth/success', function(request, response){
+router.post('/api/auth', function(request, response){
     auth.auth(request, response)
 })
 
-router.get('/catalog', function(request, response){
-    response.render("catalog.hbs", {
-            title: "Добро пожаловать!",
-            name: "Каталог",
-            products: {
-                'Тюльпан':100, 'Роза':100, 'Гвоздика':100, 'Астра':100, 'Хризантема':100, 'Ирис':100, 'Нарцисс':100, 'Ромашка':100,
-            },
-
-    })
-})
-router.get('/home', async function(request, response){
-    if (request.session.user) {
-        response.render("home.hbs", {
-            name: "Anna",
-            age: "20",
-            university: "National Research Nuclear University MEPhI",
-            users: await user.findAll()
-        })
+router.post('/api/catalog', function(request, response){
+    if (request.body.result){
+        auth.changeBasket(request, response)
     }
     else {
-        response.redirect('../auth');
+        auth.checkSession(request, response)
     }
 })
-router.get('/logout', function(request, response){
+router.post('/api/home', function(request, response){
+    if (request.body.change){
+        auth.changeCash(request, response)
+    }
+    else {
+        auth.checkSession(request, response)
+    }
+})
+router.post('/api/logout', function(request, response){
     if(request.session.user) {
         delete request.session.user;
     }
-    response.redirect('../auth');
 })
 
-router.get('/catalog', function(request, response){
-    //ReactDOM.render(<Catalog />, document.getElementById('root'));
-})
 
 router.use(function (request, response,  next){
     let err = new Error()

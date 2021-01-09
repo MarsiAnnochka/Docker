@@ -4,7 +4,11 @@ const app = express();
 const hbs = require("hbs");
 const passport = require("passport");
 const routes = require("./routes");
+const bodyParser = require('body-parser')
 const session = require('express-session');
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
 
 let result = 0;
 let counts = [0,0,0,0,0,0,0,0]

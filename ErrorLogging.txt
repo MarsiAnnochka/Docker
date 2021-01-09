@@ -26,3 +26,10 @@
 404  Not Found  GET  /favicon.ico  Mon, 21 Dec 2020 12:58:58 GMT
 404  Not Found  GET  /favicon.ico  Mon, 21 Dec 2020 13:00:32 GMT
 404  Not Found  GET  /favicon.ico  Mon, 21 Dec 2020 14:05:40 GMT
+404  Not Found  GET  /api/catalog  Wed, 23 Dec 2020 13:03:28 GMT
+404  Not Found  GET  /api/catalog  Wed, 23 Dec 2020 13:07:38 GMT
+404  Not Found  GET  /api/EgorovaAnna/lab1/auth  Wed, 23 Dec 2020 13:18:52 GMT
+404  Not Found  POST  /api/auth  Fri, 25 Dec 2020 18:50:56 GMT
+404  Not Found  POST  /api/auth  Fri, 25 Dec 2020 18:53:13 GMT
+404  Not Found  POST  /api/home  Mon, 28 Dec 2020 06:52:15 GMT
+404  Not Found  POST  /api/home  Mon, 28 Dec 2020 06:52:36 GMT

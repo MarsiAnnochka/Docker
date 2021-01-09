@@ -6,8 +6,8 @@ const user = require('./models/model')(sequelize, Sequelize);
 const bcrypt = require('bcrypt')
 
 module.exports.register = function register(request, response) {
-    let username = request.query.username
-    let password = request.query.password
+    let username = request.body.username || ''
+    let password = request.body.password || ''
     if (username && password) {
         user.findOne({where: {username: username}}).then( (User) => {
                 if (!User) {
@@ -17,34 +17,35 @@ module.exports.register = function register(request, response) {
                     if(request.session.user) {
                         delete request.session.user;
                     }
-                    response.redirect('/auth')
+                    request.session.user = {username: username}
+                    response.send({message: 'ok', error: false})
                 } else {
-                    response.send('Пользователь с таким именем уже существует!');
+                    response.send({message:'Пользователь с таким именем уже существует!', error: true});
                 }
         })
             .catch((err)=>{
                 throw err;
             });
     } else {
-        return response.send('Введите имя пользователя и пароль!');
+        return response.send({message:'Введите имя пользователя и пароль!', error: true});
     }
 };
 
 module.exports.auth = function auth(request, response) {
-console.log('hello2')
-    let username = request.query.username || ''
-    let password = request.query.password || ''
+
+    let username = request.body.username || ''
+    let password = request.body.password || ''
     if (username && password) {
         user.findOne({where: {username: username}}).then( (User) => {
                 if (!User) {
-                    response.send('Пользователя с таким именем не существует!')
+                    response.send({message:'Пользователя с таким именем не существует!', error: true})
                 } else {
                     comparePasswd(User, password, (error, isMatch) => {
                         if (isMatch && !error) {
                             request.session.user = {username: username}
-                            response.redirect('../home')
+                            response.send({error: false, message: 'ok'})
                         } else {
-                            response.send('Неверный пароль!');
+                            response.send({message: 'Неверный пароль!', error: true});
                         }
                     });
                 }
@@ -53,9 +54,49 @@ console.log('hello2')
                 throw err;
             });
     } else {
-        return response.send('Введите имя пользователя и пароль!')
+        response.send({message:'Введите имя пользователя и пароль!', error: true})
     }
 };
+
+module.exports.checkSession = function checkSession(request, response){
+    if (request.session.user) {
+        user.findOne({where: {username: request.session.user.username}}).then( (User) => {
+                let cash = User.dataValues.cash
+                let basket = User.dataValues.basket
+                response.send({logged: true, cash: cash, basket: basket})
+            }
+        ).catch((err)=>{
+            throw err;
+        });
+    }
+    else {
+        response.send({logged: false})
+    }
+}
+
+module.exports.changeBasket = function changeBasket(request, response){
+        user.update({basket: request.body.result},{where: {username: request.session.user.username}})
+        .catch((err)=>{
+            throw err;
+        });
+}
+
+module.exports.changeCash = function changeCash(request, response){
+    user.update({cash: request.body.change, basket:0},{where: {username: request.session.user.username}})
+        .catch((err)=>{
+            throw err;
+        });
+}
+
+module.exports.getBasket = function getBasket(request, response){
+    user.findOne({where: {username: request.session.user.username}}).then( (User) => {
+            let basket = User.dataValues.basket
+            response.send({logged: true, cash: basket})
+        }
+    ).catch((err)=>{
+        throw err;
+    });
+}
 
 function hash(User, next) {
     bcrypt.genSalt(10, function (error, salt) {

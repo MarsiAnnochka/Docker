@@ -21,6 +21,14 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      cash: {
+        type: Sequelize.INTEGER,
+        defaultValue: 5000
+      },
+      basket: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       }
     });
   },
